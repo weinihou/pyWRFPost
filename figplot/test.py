@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 '''
 Some temporare plots
-
+dBZ Vorticity
+用 basemap
+时间操作还未熟练
 '''
 
 
@@ -28,7 +30,7 @@ scmap = pltc.ListedColormap(sswcmap,name='radarcolor')
 
 
 #%% dbz
-for time in range(0,12):
+for time in range(0,12):    #当时还未找到替换时间的方法
     level = 10
     #m = Basemap(width=1200000,height=900000,projection='lcc',
     #            resolution='c',lat_1=45.,lat_2=55,lat_0=50,lon_0=-107.)

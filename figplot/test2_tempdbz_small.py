@@ -4,6 +4,7 @@
 Created on Wed Dec 14 15:45:57 2016
 tempfile to draw dbz
 Created on Fri Dec 16 01:07:57 2016
+A small region of dBZ, using basemap, but adjust the area by hand.
 
 @author: shiweisun
 """
