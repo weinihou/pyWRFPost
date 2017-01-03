@@ -1,8 +1,10 @@
 # pyWRFPost
 
-sa
-
-
+Many functions and files are adapted from 
+  WEM     (https://github.com/johnrobertlawson/WEM) , 
+  pywrf   (http://pywrf.googlecode.com/)
+  
+  and some others.
 d
 ddd
 
