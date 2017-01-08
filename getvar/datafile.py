@@ -28,6 +28,8 @@ class NC(DataFile):
         temp = self.NC.TITLE
         if 'WRF' in temp:
             self.type_of_nwm = 'wrf'
+        self.fields_orig = list(self.NC.variables.keys())
+        self.globattrs = self.NC.ncattrs()
 
             
         

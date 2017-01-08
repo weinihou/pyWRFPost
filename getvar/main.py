@@ -11,14 +11,21 @@ class OUT(NC):
     def __init__(self,fpath):
         super(OUT,self).__init__(fpath)
         pass
-    def getvar(self,vrbl):
+    def getvar(self,vrbl,ztype=None,zlevels=None):
         '''
         Get the variables.
         
         '''
         from .originvar import originvar
-        return originvar(self,vrbl)
-        
+        temp = originvar(self,vrbl)
+        if ztype is None:
+            var = temp
+            pass
+        else:
+            from .interpvar import interp_z
+            var = interp_z(self,temp,ztype,zlevels)
+            
+        return var
         pass
 
 def open(fpath):

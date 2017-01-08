@@ -17,4 +17,16 @@ import numpy as np
 from .datafile import NC
 
 
-#def interp_p(var,p_list,):
+def interp_z(NC,vrbl,ztype,zlevels,):
+    if zlevels is None:
+        raise 'aaaaa'
+    elif ztype.lower() == 'p':
+#        pressure_pert = NC.getvar()
+        pass
+    elif ztype.lower() in ['h','agl']:
+        hgt 
+        ph
+        phb
+        
+        pass
+        
