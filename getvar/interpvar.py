@@ -16,6 +16,18 @@ interp_lonlat
 import numpy as np
 from .datafile import NC
 
+def get_h(NC):
+    terrain = NC.variables['HGT'][:]
+    ph = NC.variables['PH'][:]
+    
+    ph += NC.variables['PHB'][:]
+    #phb = fo.variables['PHB'][:]
+    #%
+    g=9.81
+    ph = (ph[:,:-1,:,:]+ph[:,1:,:,:])/2
+    height_above_sea = ph/g
+    height_above_ground = height_above_sea - terrain.reshape([12,1,498,750])
+    return height_above_ground,height_above_sea
 
 def interp_z(NC,vrbl,ztype,zlevels,):
     if zlevels is None:
