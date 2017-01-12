@@ -5,17 +5,20 @@ Created on Tue Jan 10 00:22:52 2017
 
 Test the scipy interp2d.
 
-The results will be different depends on the format that the input data is. 
+The results will be different depends on the format that the input data is.
 
 When given the short, un-meshgrid array x and y, you will get the normal answer
 of bilinear interpolation. But when you give the all x and y, the function will
-think you're putting irregular grid data, and so the results are different. 
+think you're putting irregular grid data, and so the results are different.
 
 @author: shiweisun
 """
-
+import matplotlib
+matplotlib.use('QT5agg')
 import numpy as np
 from scipy import interpolate as itp
+import matplotlib.pyplot as plt
+pathout = '/Users/shiweisun/pics/'
 a = np.array([[0, 1, 2, 3],
               [0, 0, 1, 2],
               [0, 0, 0, 1]])
@@ -47,7 +50,7 @@ plt.title('as irregular grids')
 plt.subplot(122)
 plt.contourf(xxx,yyy,a2)
 plt.title('as regular grids')
-plt.savefig(pathout+'/interp2d',dpi = 600,bbox_inches='tight')
-        
-plt.close()
 
+# plt.savefig(pathout+'/interp2d',dpi = 600,bbox_inches='tight')
+plt.show()
+# plt.close()

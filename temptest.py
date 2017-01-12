@@ -89,7 +89,7 @@ w = (w[:,1:,:,:]+w[:,:-1,:,:])*0.5
 u_div_m = u_orig/msf_u.reshape([12,1,498,751])
 v_div_m = v_orig/msf_v.reshape([12,1,499,750])
 
-#%%
+#%
 
 temp_i1 = u_div_m[:,:,:,:-1]    # i
 temp_i2 = u_div_m[:,:,:,1:]     # i+1
@@ -141,7 +141,7 @@ dys = dy / msf_m
 dvdy = (temp_i2 - temp_i1)/dys.reshape([12,1,498,750])
 vort = dvdx - dudy
 div = dudx + dvdy
-#%%
+#%
 u = (u_orig[:,:,:,:-1]+u_orig[:,:,:,1:])*0.5
 v = (v_orig[:,:,:-1,:]+v_orig[:,:,1:,:])*0.5
 
@@ -224,22 +224,22 @@ for times in range(0,1):
         
         #%
         
-        temp = w[times,level,...].copy()
+        temp = vort[times,level,...].copy()
 #        temp = dbz[times,8,...].copy()
         pm = m.contourf(x,y,temp,
-#                        levels =list( np.arange(-7,8)*1e-3),
-#                        levels =list( np.arange(-7,8)*1e-3),
+                        levels =list( np.arange(-7,8)*1e-3),
+#                        levels =list( np.linspace(-5.0,5.0,20)),
 #                        cmap = 'gray_r',
 #                        cmap=scmap,
                         cmap='PiYG',
-                        extend='max',)
+                        extend='both',)
 #                        levels=range(10,76,5))#,cmap=scmap,levels=range(10,76,5))
         
         timebjt = time.strftime(fmt2,time.localtime(
                             time.mktime(time.strptime(astr,fmt))+deltatime  ))
         timeutc = time.strftime(fmt2,time.localtime(
                             time.mktime(time.strptime(astr,fmt)) ))
-        plt.title(timeutc+'UTC  '+timebjt+'BJT   w at 1km')#Vort at '+str(level) + 'level')
+        plt.title(timeutc+'UTC  '+timebjt+'BJT   Vort at '+str(level) + 'level')
     
         
         # Now adding the colorbar
@@ -252,7 +252,7 @@ for times in range(0,1):
 #        m.transform_vector(u,v,lon[0,0,:],lat[0,:,0],50,40,returnxy=True,masked=True)
 #        # now plot.
 #        Q = m.quiver(xx,yy,uproj,vproj,scale=700)
-        Q = m.quiver(x[skip,skip],y[skip,skip],u_related[times,8,skip,skip],v_related[times,level,skip,skip],scale=1000)
+        Q = m.quiver(x[skip,skip],y[skip,skip],u[times,8,skip,skip],v[times,level,skip,skip],scale=1000)
 #        # make quiver key.
         qk = plt.quiverkey(Q, 0.1, 0.1, 20, '10 m/s', labelpos='W')
         
@@ -262,8 +262,8 @@ for times in range(0,1):
         
         
         temp = filename[filename.index('wrfout_d')+7:filename.index('wrfout_d')+11]
-        temp = pathout + '/sm_w'+temp+timeutc+'_lev_'+str(level)
-        plt.savefig(temp,dpi = 600,bbox_inches='tight')
+        temp = pathout + '/sm_vort_groundV'+temp+timeutc+'_lev_'+str(level)
+#        plt.savefig(temp,dpi = 600,bbox_inches='tight')
         
         #plt.show()
         plt.close()
@@ -290,16 +290,27 @@ def interp_z_test(vrbl):
     return vrbl_new
 
 def get_slice(vrbl_new):
-    for i in range(vrbl_new.shape[0]):
-        func = itp.interp2d(x,y,vrbl_new[i,:,:])
-        vrbl_slice = [func(slicelin_x[a],slicelin_y[a]) for a in len(slicelin_x)]
+#    for i in range(vrbl_new.shape[0]):
+    func = itp.interp2d(x[150:250,500:700],y[150:250,500:700],vrbl_new[150:250,500:700])
+    vrbl_slice = [func(slicelin_x[a],slicelin_y[a]) for a in len(slicelin_x)]
     return vrbl_slice
 
 #%%
 vrbl_new = interp_z_test(vrbl)
-temp = get_slice(vrbl_new)
+#%%
+#temp = get_slice(terrain[0,:,:])
+vrbl_new = terrain[0,:,:]
+b = time.clock()
 
+func = itp.interp2d(x[180:195,630:655]/1000,y[180:195,630:655]/1000,vrbl_new[180:195,630:655])
 
+c = time.clock()
+print c-b
+b=c
+#vrbl_slice = np.zeros(vrbl_new.shape[])
+vrbl_slice = [func(slicelin_x[a]/1000,slicelin_y[a]/1000) for a in [0]]
+c = time.clock()
+print c-b
 
 #%% test plot to see the interpolation
 plt.figure()
