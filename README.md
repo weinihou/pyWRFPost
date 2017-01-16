@@ -11,16 +11,7 @@ Many functions and files are adapted from
   
   
   
-d
-ddd
+  
+# Ok, since I found the wrf-python package(https://wrf-python.readthedocs.io/en/latest/) is soooooo convenient to use, and my ability is far from good, this work will be laid aside or even stopped.
 
-#ddd
 
-dddd
-d
-# d
-d
-  4
-  #d
-  # r
-  $
