@@ -252,7 +252,7 @@ for times in range(0,1):
 #        m.transform_vector(u,v,lon[0,0,:],lat[0,:,0],50,40,returnxy=True,masked=True)
 #        # now plot.
 #        Q = m.quiver(xx,yy,uproj,vproj,scale=700)
-        Q = m.quiver(x[skip,skip],y[skip,skip],u[times,8,skip,skip],v[times,level,skip,skip],scale=1000)
+        Q = m.quiver(x[skip,skip],y[skip,skip],u[times,level,skip,skip],v[times,level,skip,skip],scale=1000)
 #        # make quiver key.
         qk = plt.quiverkey(Q, 0.1, 0.1, 20, '10 m/s', labelpos='W')
         

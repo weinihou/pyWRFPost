@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="a6bddaff-516d-445c-8f18-0ed8b018fef9" name="xue03" url="http://114.212.48.21">
+        <fileTransfer host="114.212.48.21" port="22" rootFolder="/data/data3/swsun/" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
